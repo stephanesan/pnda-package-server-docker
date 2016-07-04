@@ -1,0 +1,16 @@
+1.3.0.8.tar.gz
+build.log
+gobblin
+jdk1.8.0_74
+kafka-manager-1.3.0.8
+master
+platform-console-backend
+platform-console-frontend
+platform-data-mgmnt
+platform-deployment-manager
+platform-libraries
+platform-package-repository
+platform-testing
+spark-1.5.0-bin-hadoop2.6.tgz
+spark-1.5.0-bin-hadoop2.6
+html
