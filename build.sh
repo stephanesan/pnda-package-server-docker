@@ -405,7 +405,7 @@ cd ..
 
 ################################################################################################
 echo "Step 9: Building Kafka manager" >> $LOG_FILE
-VERSION=1.3.0.8
+VERSION=1.3.1.6
 KAFKA_MANAGER="$PWD/kafka-manager-${VERSION}"
 if [ ! -d $KAFKA_MANAGER ]; then
   echo "downloading kafka manager $VERSION in $PWD" >> $LOG_FILE
