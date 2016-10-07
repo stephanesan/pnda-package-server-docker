@@ -13,6 +13,8 @@ The scripts were tested using a host machine running [Ubuntu](http://www.ubuntu.
 1. 14.04 LTS with 8 GB of memory & Docker version 1.8.3
 2. 16.04 LTS with 10 GB of memory & Docker version 1.12.1, build 23cf638
 
+A minumum of 5Gb disk space is recommended.
+
 The scripts may work in other UNIX environments as well. See the [Questions & Answers](http://pndaproject.io/qa) site for further information.
 
 ## Building the package server container
