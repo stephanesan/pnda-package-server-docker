@@ -6,13 +6,11 @@ fi
 echo "Starting build script" > $LOG_FILE
 
 if [ -z "$GITHUB_ENDPOINT" ]; then
-    echo "Need a GitHub endpoint - GITHUB_ENDPOINT" >> $LOG_FILE
-    exit 1
+    GITHUB_ENDPOINT="https://github.com/pndaproject"
 fi  
 
 if [ -z "$BRANCH" ]; then
-    echo "Need a branch - BRANCH" >> $LOG_FILE
-    exit 1
+    BRANCH="master"
 fi 
 
 cd /root
@@ -383,7 +381,10 @@ HADOOP_VERSION=2.6.0-cdh5.4.9
 if [ ! -d $JAVA_HOME ]; then
   cd ..
   echo "downloading jdk 8 from Oracle in $PWD" >> $LOG_FILE
-  curl -b oraclelicense=accept-securebackup-cookie -L http://download.oracle.com/otn-pub/java/jdk/8u74-b02/jdk-8u74-linux-x64.tar.gz | tar xz --no-same-owner
+  curl -b oraclelicense=accept-securebackup-cookie -L http://download.oracle.com/otn-pub/java/jdk/8u74-b02/jdk-8u74-linux-x64.tar.gz >>  jdk-8u74-linux-x64.tar.gz
+  tar xz jdk-8u74-linux-x64.tar.gz
+  mkdir -p /var/www/html/components/java/jdk/8u74-b02
+  cp jdk-8u74-linux-x64.tar.gz /var/www/html/components/java/jdk/8u74-b02/
   cd gobblin
 else
   echo "	JAVA_HOME is already set as $JAVA_HOME" >> $LOG_FILE
