@@ -27,7 +27,7 @@ JAVA_HOME="$PWD/jdk1.8.0_74"
 if [ ! -d $JAVA_HOME ]; then
   echo "downloading jdk 8 from Oracle in $PWD" >> $LOG_FILE
   curl -b oraclelicense=accept-securebackup-cookie -L http://download.oracle.com/otn-pub/java/jdk/8u74-b02/jdk-8u74-linux-x64.tar.gz | tar xz --no-same-owner
-  tar zcf jdk-8u74-linux-x64.tar.gz jdk1.8.0_74
+  tar zxf jdk-8u74-linux-x64.tar.gz jdk1.8.0_74
   mkdir -p /var/www/html/components/java/jdk/8u74-b02
   cp jdk-8u74-linux-x64.tar.gz /var/www/html/components/java/jdk/8u74-b02/
 else
