@@ -23,6 +23,18 @@ RELEASE_PATH="/var/www/html/$BRANCH"
 echo "Set RELEASE_PATH: $RELEASE_PATH" >> $LOG_FILE
 
 echo "Step 0: install required software" >> $LOG_FILE
+JAVA_HOME="$PWD/jdk1.8.0_74"
+if [ ! -d $JAVA_HOME ]; then
+  echo "downloading jdk 8 from Oracle in $PWD" >> $LOG_FILE
+  curl -b oraclelicense=accept-securebackup-cookie -L http://download.oracle.com/otn-pub/java/jdk/8u74-b02/jdk-8u74-linux-x64.tar.gz | tar xz --no-same-owner
+  tar zcf jdk-8u74-linux-x64.tar.gz jdk1.8.0_74
+  mkdir -p /var/www/html/components/java/jdk/8u74-b02
+  cp jdk-8u74-linux-x64.tar.gz /var/www/html/components/java/jdk/8u74-b02/
+else
+  echo "	JAVA_HOME is already set as $JAVA_HOME" >> $LOG_FILE
+fi
+export PATH=$JAVA_HOME/bin:$PATH
+
 apt-get install -y git nodejs npm gradle curl python-setuptools apt-transport-https
 if [ ! -f /etc/apt/sources.list.d/sbt.list ]; then
 	echo "	install sbt" >> $LOG_FILE
@@ -50,7 +62,7 @@ fi
 ################################################################################################
 PLATFORM_TESTING="$GITHUB_ENDPOINT/platform-testing.git"
 echo "Step 1: cloning platform-testing $PLATFORM_TESTING in $PWD" >> $LOG_FILE
-if [ ! -d "$PWD/platform-testing" ]; then
+if [ ! -d "$	/platform-testing" ]; then
 	echo "	cloning $BRANCH for platform-testing" >> $LOG_FILE
 	git clone $PLATFORM_TESTING
 	if [ ! -d "$PWD/platform-testing" ]; then
@@ -375,21 +387,8 @@ if( [ -z "$VERSION" ] || [ "$VERSION" = "lis" ] ) then
 	VERSION="latest"
 fi
 echo "VERSION=$VERSION" > VERSION
-
-JAVA_HOME="$PWD/../jdk1.8.0_74"
 HADOOP_VERSION=2.6.0-cdh5.4.9
-if [ ! -d $JAVA_HOME ]; then
-  cd ..
-  echo "downloading jdk 8 from Oracle in $PWD" >> $LOG_FILE
-  curl -b oraclelicense=accept-securebackup-cookie -L http://download.oracle.com/otn-pub/java/jdk/8u74-b02/jdk-8u74-linux-x64.tar.gz >>  jdk-8u74-linux-x64.tar.gz
-  tar xz jdk-8u74-linux-x64.tar.gz
-  mkdir -p /var/www/html/components/java/jdk/8u74-b02
-  cp jdk-8u74-linux-x64.tar.gz /var/www/html/components/java/jdk/8u74-b02/
-  cd gobblin
-else
-  echo "	JAVA_HOME is already set as $JAVA_HOME" >> $LOG_FILE
-fi
-export PATH=$JAVA_HOME/bin:$PATH
+
 ./gradlew build -Pversion=${VERSION} -PuseHadoop2 -PhadoopVersion=${HADOOP_VERSION}
 PNDA_RELEASE_NAME=gobblin-distribution-${VERSION}.tar.gz
 if [ ! -f $PNDA_RELEASE_NAME ]; then
