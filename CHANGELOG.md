@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [0.1.1] 2016-10-21
 ### Changed
 - PNDA-2326: launch the build script automatically and make the jdk available through http
 
