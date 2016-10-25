@@ -250,6 +250,7 @@ echo "Git hash $GIT_COMMIT" > MANIFEST
 cd console-frontend
 npm install
 npm install -g grunt
+export PATH=$PATH:/usr/local/bin/
 echo "{ \"name\": \"console-frontend\", \"version\": \"$VERSION\" }" > package-version.json
 grunt package
 if [ ! -f console-frontend-$VERSION.tar.gz ]; then
